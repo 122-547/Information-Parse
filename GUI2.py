@@ -49,7 +49,7 @@ root.resizable(0, 0)
 root.geometry("900x500")
 root["bg"] = "#CACACA"
 
-image = PhotoImage(file="image.png")
+image = PhotoImage(file="icon.png")
 root.iconphoto(False, image)
 
 text = Text(wrap="word")

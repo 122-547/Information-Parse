@@ -17,11 +17,13 @@ class ParseInformation:
               self.result_status = ""
               self.result_status2 = ""
 
+              self.run = False
               self.list_ = []
               self.main_data = []
 
               self.status = self.get.status_code
               self.trys = 0
+              self.num = 0
        
 
        def Parse(self):
@@ -36,14 +38,15 @@ class ParseInformation:
                                   self.text = ""    
 
               for g in self.list_:
-                            if g.find(';') == -1:
-                                   if g.find(':') == -1:
-                                           if g.find('"') == -1:
-                                                   if g.find("'") == -1:
-                                                        if g.find('↑') == -1:
-                                                               if g.find("[править | править код]") == -1:
-                                                                      if g.find(self.input_word) != -1 and len(g) >= 20:
-                                                                             self.main_data.append(g)
+                     for k in list(g):
+                            if k == "\n":
+                                   self.num += 1
+                     
+                     if g.find(self.input_word.lower()) != -1 or g.find(self.input_word) != -1 and len(g) >= 20 and self.num < 4:
+                                   if g.find(';') == -1:
+                                          if g.find('↑') == -1:
+                                                 if g.find("[править | править код]") == -1:
+                                                        self.main_data.append(g)
 
               
               if self.status == 200:
@@ -57,7 +60,4 @@ class ParseInformation:
               
               return self.main_data
        
-              
-              
-              
               
